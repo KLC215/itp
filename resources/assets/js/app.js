@@ -4,6 +4,17 @@ import './bootstrap';
 // Init all components
 import './components';
 
-const app = new Vue({
-    el: '#app'
+new Vue({
+
+	el: '#app',
+
+	data: {
+		signInModalConfig: {
+			show: false
+		},
+		signUpModalConfig: {
+			show: false
+		}
+	},
+
 });

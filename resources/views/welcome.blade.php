@@ -23,11 +23,16 @@
 	</head>
 	<body>
 
-		@include('layouts.navBar')
-
 		<div id="app" class="content">
+
+			@include('layouts.navBar')
+
 			<h1 style="color: white">Learn Loop, Happy Loop</h1>
-			<button class="btn btn-success">Sign UP</button>
+
+			<button class="btn btn-success btn-lg" @click="signUpModalConfig.show = true">Sign Up</button>
+
+			<sign-up :config="signUpModalConfig"></sign-up>
+
 		</div>
 
 		<script src="{{ asset('js/app.js') }}"></script>

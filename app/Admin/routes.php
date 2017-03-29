@@ -16,13 +16,13 @@ Route::group([
 		'prefix' => 'game',
 	], function (Router $router) {
 		$router->resource('users', UsersController::class);
-		$router->resource('arcades', ArcadesController::class);
+		$router->resource('stages', StagesController::class);
 		$router->resource('badges', BadgesController::class);
-		$router->resource('challenges', ChallengesController::class);
 		$router->resource('items', ItemsController::class);
 		$router->resource('levels', LevelsController::class);
 		$router->resource('questions', QuestionsController::class);
 		$router->resource('question-types', QuestionTypesController::class);
+		$router->resource('answers', AnswersController::class);
 	});
 
 });

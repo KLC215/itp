@@ -16,10 +16,10 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('level_id');
-            $table->unsignedInteger('challenge_id')->nullable();
-            $table->unsignedInteger('arcade_id')->nullable();
-            $table->unsignedInteger('type');
+            $table->unsignedInteger('stage_id')->nullable();
+            $table->unsignedInteger('question_type_id');
             $table->text('question');
+            $table->text('hints');
             $table->text('question_file')->nullable();
             $table->timestamps();
         });

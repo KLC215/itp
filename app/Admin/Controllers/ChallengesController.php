@@ -75,6 +75,22 @@ class ChallengesController extends Controller
 
             $grid->id('ID')->sortable();
 
+			$grid->name('Challenge')->sortable();
+
+			$grid->description('Description');
+
+			$grid->preferences('Preferences')->display(function ($preferences) {
+
+				$data = '';
+
+				foreach ($preferences as $key => $val) {
+					$data .= "{$key}: <i>{$val}</i><br>";
+				}
+
+				return $data;
+			});
+
+
             $grid->created_at();
             $grid->updated_at();
         });
@@ -90,6 +106,16 @@ class ChallengesController extends Controller
         return Admin::form(Challenge::class, function (Form $form) {
 
             $form->display('id', 'ID');
+
+			$form->text('name')->rules('required|max:255');
+			$form->textarea('description')->rules('required');
+
+			$form->divide();
+
+			$form->embeds('preferences', 'Challenge preferences', function ($form) {
+				$form->number('coin');
+				$form->number('exp');
+			});
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

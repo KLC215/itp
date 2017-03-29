@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="full" lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.locale') }}" class="content-bgc">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +12,7 @@
 
 		<!-- Styles -->
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/lib.css') }}" rel="stylesheet">
 
 		<!-- Scripts -->
 		<script>
@@ -20,16 +21,27 @@
         ]) !!};
 		</script>
 
+
+		@yield('header-script')
+
 	</head>
 	<body>
 
-		@include('layouts.navBar')
+		<div id="app" class="content-bgc">
 
-		<div id="app" class="container">
-			@yield('content')
+			@include('layouts.navBar')
+
+			<div>
+				<transition name="fade" mode="out-in" appear>
+					@yield('body-script')
+					@yield('content')
+				</transition>
+			</div>
+
 		</div>
 
+		<!-- Scripts -->
 		<script src="{{ asset('js/app.js') }}"></script>
-
+		@yield('header-script')
 	</body>
 </html>

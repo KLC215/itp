@@ -24,8 +24,8 @@ class QuestionTypesController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Question types');
+            $content->description('manage question types');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class QuestionTypesController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Edit question type');
+            $content->description('');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class QuestionTypesController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Create question type');
+            $content->description('');
 
             $content->body($this->form());
         });
@@ -75,6 +75,9 @@ class QuestionTypesController extends Controller
 
             $grid->id('ID')->sortable();
 
+            $grid->name('Name')->sortable();
+            $grid->display_name('Display name')->sortable();
+
             $grid->created_at();
             $grid->updated_at();
         });
@@ -90,6 +93,9 @@ class QuestionTypesController extends Controller
         return Admin::form(QuestionType::class, function (Form $form) {
 
             $form->display('id', 'ID');
+
+            $form->text('name', 'Name');
+            $form->text('display_name', 'Display name');
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

@@ -24,8 +24,8 @@ class LevelsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Levels');
+            $content->description('manage levels');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class LevelsController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Edit level');
+            $content->description('');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class LevelsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Create level');
+            $content->description('');
 
             $content->body($this->form());
         });
@@ -75,6 +75,9 @@ class LevelsController extends Controller
 
             $grid->id('ID')->sortable();
 
+            $grid->name('Name')->sortable();
+            $grid->display_name('Display name')->sortable();
+
             $grid->created_at();
             $grid->updated_at();
         });
@@ -90,6 +93,13 @@ class LevelsController extends Controller
         return Admin::form(Level::class, function (Form $form) {
 
             $form->display('id', 'ID');
+
+            $form->hidden('name');
+            $form->text('display_name', 'Display name');
+
+			$form->saving(function ($form) {
+				$form->name = str_slug($form->display_name);
+			});
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

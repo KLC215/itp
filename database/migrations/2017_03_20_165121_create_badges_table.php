@@ -15,8 +15,7 @@ class CreateBadgesTable extends Migration
     {
         Schema::create('badges', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('challenge_id')->nullable();
-            $table->unsignedInteger('arcade_id')->nullable();
+            $table->unsignedInteger('stage_id')->nullable();
             $table->text('image');
             $table->text('description');
             $table->timestamps();

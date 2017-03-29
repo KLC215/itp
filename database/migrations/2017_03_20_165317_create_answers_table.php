@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArcadesTable extends Migration
+class CreateAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateArcadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('arcades', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('description');
+            $table->unsignedInteger('question_id');
+            $table->text('answer');
+            $table->text('feedback')->nullable();
+            $table->boolean('is_correct')->default(false);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateArcadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arcades');
+        Schema::dropIfExists('answers');
     }
 }

@@ -1,12 +1,42 @@
-
-// Bootswatch United Theme
-//@import "bootswatch/theme/variables";
-//@import "node_modules/united/variables";
-//@import "node_modules/bootswatch-sass/bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap";
-//@import "node_modules/united/bootswatch";
-
-@import "node_modules/bootswatch/united/variables";
+// Bootstrap + Bootswatch
+@import "node_modules/bootswatch/flatly/variables";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "node_modules/bootswatch/united/bootswatch";
-
+@import "node_modules/bootswatch/flatly/bootswatch";
+// Font-awesome
+@import "node_modules/font-awesome/scss/font-awesome";
+// Hover.css
+@import "node_modules/hover.css/scss/hover";
+// Customs
 @import "./welcome";
+@import "./stage-box";
+@import "./game";
+
+// Content animation
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+
+.content-pr {
+  padding-right: 8%;
+}
+
+.content-ml {
+  margin-left: 10px;
+}
+
+.content-mr {
+  margin-right: 10px;
+}
+
+.content-mt {
+  margin-top: 10px;
+}
+
+.a-inherit-color {
+  background-color: inherit;
+  color: inherit;
+}

@@ -15,8 +15,11 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('stage_id')->nullable();
             $table->string('name');
+            $table->string('display_name');
             $table->text('description');
+            $table->text('image');
             $table->text('features');
             $table->timestamps();
         });

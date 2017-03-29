@@ -49,11 +49,11 @@ return [
         'disk' => 'admin',
 
         'directory'  => [
-            'image'  => 'image',
+            'image'  => 'images',
             'file'   => 'file',
         ],
 
-        'host' => 'http://localhost:8000/upload/',
+        'host' => 'http://itp.lh/',
     ],
 
     /*
