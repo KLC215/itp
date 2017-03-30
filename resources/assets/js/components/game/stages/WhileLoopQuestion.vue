@@ -19,6 +19,7 @@
 						:disabled="btnData[0].disabled"
 						style="margin: 10px"
 						@click="onAnswer(btnData[0])">{{ btnData[0].data }}
+
 				</button>
 			</div>
 			<div class="col-xs-12 col-sm-6 text-center">
@@ -26,6 +27,7 @@
 						:disabled="btnData[1].disabled"
 						style="margin: 10px"
 						@click="onAnswer(btnData[1])">{{ btnData[1].data }}
+
 				</button>
 			</div>
 			<div class="col-xs-12 col-sm-6 text-center">
@@ -33,6 +35,7 @@
 						:disabled="btnData[2].disabled"
 						style="margin: 10px"
 						@click="onAnswer(btnData[2])">{{ btnData[2].data }}
+
 				</button>
 			</div>
 			<div class="col-xs-12 col-sm-6 text-center">
@@ -40,6 +43,7 @@
 						:disabled="btnData[3].disabled"
 						style="margin: 10px"
 						@click="onAnswer(btnData[3])">{{ btnData[3].data }}
+
 				</button>
 			</div>
 		</div>
@@ -75,25 +79,28 @@
 					this.errorRatio++;
 					answer.disabled = true;
 
-					this.$swal('Oops...', 'Wrong answer, try again <i class="eo-32 eo-relaxed"></i>', 'error');
+					this.$swal('Oops...', 'Wrong answer, try again <i class="eo-32 eo-relaxed"></i>', 'error')
+						.then(() => {
+							if (this.errorRatio >= 2) {
+								this.$swal({
+									title: 'Umm...',
+									html: "It seems like you don't understand <b>While Loop</b><br>Let's go back to intro again<i class='eo-32 eo-relaxed'></i>",
+									type: 'warning',
+									showCancelButton: false,
+									confirmButtonColor: '#3085d6',
+									cancelButtonColor: '#d33',
+									confirmButtonText: 'Fighting! <i class="eo-32 eo-blush">'
+								}).then(function () {
+									for (let i = 0; i < self.btnData.length; i++) {
+										self.btnData[i].disabled = false;
+									}
+									location.reload();
+								});
+							}
+						});
 					ERROR_SOUND.play();
 
-					if (this.errorRatio >= 2) {
-						this.$swal({
-							title: 'Umm...',
-							html: "It seems like you don't understand <b>While Loop</b><br>Let's go back to intro again<i class='eo-32eo-relaxed'></i>",
-							type: 'warning',
-							showCancelButton: false,
-							confirmButtonColor: '#3085d6',
-							cancelButtonColor: '#d33',
-							confirmButtonText: 'Fighting! <i class="eo-32 eo-blush">'
-						}).then(function () {
-							for (let i = 0; i < self.btnData.length; i++) {
-								self.btnData[i].disabled = false;
-							}
-							location.reload();
-						});
-					}
+
 
 					return;
 				}

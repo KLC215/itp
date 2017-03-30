@@ -11,7 +11,7 @@
 				<el-progress
 						:text-inside="true"
 						:stroke-width="18"
-						:percentage="100"
+						:percentage="0"
 						status="success">
 				</el-progress>
 				<hr>

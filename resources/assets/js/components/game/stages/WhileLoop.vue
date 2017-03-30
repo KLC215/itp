@@ -54,7 +54,10 @@
 					stage_id: self.questions[0].stage_id,
 					error_ratio: errorRatio,
 				}).then(response => {
-					self.$swal('Congratulations! <i class="eo-32 eo-tada"></i>', `You've got <br><i class="eo-32 eo-money_mouth_face"></i>${response.data.coin}<span class="badge">Coin</span><br><span class="eo-20 eo-heart_eyes"></span>${response.data.coin}<span class="badge">EXP</span>`);
+					self.$swal('Congratulations! <i class="eo-32 eo-tada"></i>', `You've got <br><i class="eo-32 eo-money_mouth_face"></i>${response.data.coin}<span class="badge">Coin</span><br><span class="eo-20 eo-heart_eyes"></span>${response.data.coin}<span class="badge">EXP</span>`)
+						.then(() => {
+							window.location.href = TUTORIAL_URL;
+						});
 				});
 			}
 		},

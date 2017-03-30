@@ -4,7 +4,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueEvents from 'vue-events';
 import 'bootstrap-sass';
-import VueHighlightJS from 'vue-highlightjs';
+//import VueHighlightJS from 'vue-highlightjs';
 import VueCodeMirror from 'vue-codemirror'
 import VueSweetAlert from 'vue-sweetalert';
 
@@ -35,7 +35,7 @@ Vue.use(ElementUI, {
 });
 Vue.use(VueEvents);
 Vue.use(UserStore);
-Vue.use(VueHighlightJS);
+//Vue.use(VueHighlightJS);
 Vue.use(VueCodeMirror);
 Vue.use(VueSweetAlert);
 
