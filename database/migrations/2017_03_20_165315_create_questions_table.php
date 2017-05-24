@@ -20,7 +20,7 @@ class CreateQuestionsTable extends Migration
             $table->unsignedInteger('question_type_id');
             $table->text('question');
             $table->text('hints');
-            $table->text('question_file')->nullable();
+            //$table->text('question_file')->nullable();
             $table->timestamps();
         });
     }

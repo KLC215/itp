@@ -91,13 +91,7 @@ class QuestionsController extends Controller
 			$grid->questionType()
 				 ->display_name('Type')
 				 ->sortable();
-
-			$grid->question_file('Question with file')->display(function ($question_file) {
-				return $question_file
-					? '<i class="fa fa-check" aria-hidden="true" style="color: green"></i>'
-					: '<i class="fa fa-times" aria-hidden="true" style="color: red"></i>';
-			});
-
+			
 			$grid->created_at();
 			$grid->updated_at();
 		});
@@ -140,10 +134,7 @@ class QuestionsController extends Controller
 			});
 			
 			$form->textarea('hints')->default('No hints provided XD');
-
-			$form->file('question_file', 'Question file')
-				 ->help('If the question type is coding, please upload the file!');
-
+			
 			$form->display('created_at', 'Created At');
 			$form->display('updated_at', 'Updated At');
 

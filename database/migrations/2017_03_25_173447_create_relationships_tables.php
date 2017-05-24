@@ -37,17 +37,18 @@ class CreateRelationshipsTables extends Migration
 			$table->unsignedInteger('user_id');
 			$table->boolean('is_completed')->default(false);
 			$table->text('statistics')->nullable();
+			$table->integer('completed_times');
 			$table->primary(['stage_id', 'user_id']);
 			$table->timestamps();
 		});
 
-		Schema::create('question_user', function (Blueprint $table) {
+		/*Schema::create('question_user', function (Blueprint $table) {
 			$table->unsignedInteger('question_id');
 			$table->unsignedInteger('user_id');
 			$table->boolean('is_completed')->default(false);
 			$table->text('statistics')->nullable();
 			$table->primary(['question_id', 'user_id']);
-		});
+		});*/
 
 
 	}
@@ -59,7 +60,7 @@ class CreateRelationshipsTables extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('question_user');
+		//Schema::dropIfExists('question_user');
 		Schema::dropIfExists('stage_user');
 		Schema::dropIfExists('badge_user');
 		Schema::dropIfExists('item_user');
