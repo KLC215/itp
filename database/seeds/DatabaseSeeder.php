@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
 		 $this->call(StagesTableSeeder::class);
 		 $this->call(LevelsTableSeeder::class);
 		 $this->call(QuestionTypesTableSeeder::class);
+		 $this->call(AdminMenusTableSeeder::class);
+		 $this->call(BadgesTableSeeder::class);
+		 $this->call(BadgeUserTableSeeder::class);
+		 $this->call(UserOperationLogsTableSeeder::class);
+		 $this->call(ItemsTableSeeder::class);
 
 	}
 }

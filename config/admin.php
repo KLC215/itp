@@ -53,7 +53,7 @@ return [
             'file'   => 'file',
         ],
 
-        'host' => 'http://itp.lh/',
+        'host' => 'http://loop.lh/',
     ],
 
     /*

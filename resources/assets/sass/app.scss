@@ -10,6 +10,7 @@
 @import "./welcome";
 @import "./stage-box";
 @import "./game";
+@import "./profile";
 
 // Content animation
 .fade-enter-active, .fade-leave-active {
@@ -39,4 +40,8 @@
 .a-inherit-color {
   background-color: inherit;
   color: inherit;
+}
+
+[v-cloak] {
+  display: none;
 }

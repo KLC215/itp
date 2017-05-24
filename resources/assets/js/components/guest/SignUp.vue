@@ -43,7 +43,6 @@
 						   @keyup.enter="submit">SIGN UP
 
 
-
 				</el-button>
 			</el-form-item>
 		</el-form>
@@ -55,9 +54,11 @@
 </template>
 
 <script>
+	import { HOME_URL, SIGNUP_POST_URL } from '../../core/urls';
 
 	export default {
 		props: ['config'],
+
 		data() {
 
 			let validateName = (rule, value, callback) => {
@@ -95,48 +96,53 @@
 
 			return {
 				signUpForm: new Form({
-					name: '',
-					email: '',
-					password: '',
+					name           : '',
+					email          : '',
+					password       : '',
 					confirmPassword: '',
 				}),
+
 				signUpRules: {
 					name: [
 						{
-							required: true,
+							required : true,
 							validator: validateName,
 						}
 					],
+
 					email: [
 						{
 							required: true,
-							message: 'Please enter email address!',
-							trigger: 'blur'
+							message : 'Please enter email address!',
+							trigger : 'blur'
 						},
 						{
-							type: 'email',
+							type   : 'email',
 							message: 'Please enter a correct email address!',
 							trigger: 'blur,change'
 						}
 					],
+
 					password: [
 						{
-							required: true,
+							required : true,
 							validator: validatePassword,
-							trigger: 'blur'
+							trigger  : 'blur'
 						}
 					],
+
 					confirmPassword: [
 						{
-							required: true,
+							required : true,
 							validator: validateConfirmPassword,
-							trigger: 'blur'
+							trigger  : 'blur'
 						}
 					]
 				},
+
 				errors: {
 					email: '',
-					name: '',
+					name : '',
 				}
 			};
 		},

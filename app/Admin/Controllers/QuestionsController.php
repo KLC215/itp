@@ -94,8 +94,8 @@ class QuestionsController extends Controller
 
 			$grid->question_file('Question with file')->display(function ($question_file) {
 				return $question_file
-					? '<i class="fa fa-check" aria-hidden="true"></i>'
-					: '<i class="fa fa-times" aria-hidden="true"></i>';
+					? '<i class="fa fa-check" aria-hidden="true" style="color: green"></i>'
+					: '<i class="fa fa-times" aria-hidden="true" style="color: red"></i>';
 			});
 
 			$grid->created_at();
@@ -128,18 +128,18 @@ class QuestionsController extends Controller
 
 			$form->embeds('question', 'Question preferences', function ($form) {
 
-				$form->textarea('problem')->rules('required');
+				$form->php('problem')->rules('required');
 
 				$form->textarea('ask_for')->rules('required');
-
-				$form->textarea('hints')->rules('required');
-
+				
 				$form->hidden('start_time')->default('');
 				$form->hidden('end_time')->default('');
 				$form->hidden('modified_time')->default('');
 				$form->hidden('error_ratio')->default(0);
 
 			});
+			
+			$form->textarea('hints')->default('No hints provided XD');
 
 			$form->file('question_file', 'Question file')
 				 ->help('If the question type is coding, please upload the file!');

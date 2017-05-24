@@ -18,7 +18,7 @@
 <script>
 	import WhileLoopIntro from './WhileLoopIntro.vue';
 	import WhileLoopQuestion from './WhileLoopQuestion.vue';
-	
+
 	export default {
 		props: ['questions', 'answers'],
 		components: {
@@ -50,15 +50,15 @@
 			completed(errorRatio) {
 				const self = this;
 	
-				axios.post(COMPLETED_STAGE_POST_URL, {
-					stage_id: self.questions[0].stage_id,
-					error_ratio: errorRatio,
-				}).then(response => {
-					self.$swal('Congratulations! <i class="eo-32 eo-tada"></i>', `You've got <br><i class="eo-32 eo-money_mouth_face"></i>${response.data.coin}<span class="badge">Coin</span><br><span class="eo-20 eo-heart_eyes"></span>${response.data.coin}<span class="badge">EXP</span>`)
-						.then(() => {
-							window.location.href = TUTORIAL_URL;
-						});
-				});
+//				axios.post(COMPLETED_STAGE_POST_URL, {
+//					stage_id: self.questions[0].stage_id,
+//					error_ratio: errorRatio,
+//				}).then(response => {
+//					self.$swal('Congratulations! <i class="eo-32 eo-tada"></i>', `You've got <br><i class="eo-32 eo-money_mouth_face"></i>${response.data.coin}<span class="badge">Coin</span><br><span class="eo-20 eo-heart_eyes"></span>${response.data.coin}<span class="badge">EXP</span>`)
+//						.then(() => {
+//							window.location.href = TUTORIAL_URL;
+//						});
+//				});
 			}
 		},
 		mounted() {

@@ -29,7 +29,9 @@
 
 		<div id="app" class="content-bgc">
 
-			@include('layouts.navBar')
+			<div style="margin-top: 50px">
+				@include('layouts.navBar')
+			</div>
 
 			<div>
 				<transition name="fade" mode="out-in" appear>

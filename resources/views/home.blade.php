@@ -1,22 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
+	<div class="container">{{-- Container start --}}
 
-		{{-- Available stages --}}
-		<div class="animated bounceInDown">
+		<div class="animated bounceInDown">{{-- Available stages start --}}
 
 			@foreach($stages as $stage)
 				<div class="col-md-6 col-xs-12">
 					<a href="{{ route($stage['name']) }}" class="a-inherit-color">
 						<el-card class="box-card-parent hvr-grow"
 								 style="cursor: pointer; background-color: #F9FAFC;">
-							<el-progress
-									:text-inside="true"
-									:stroke-width="18"
-									:percentage="0"
-									status="success">
-							</el-progress>
 							<hr>
 							<div class="media">
 								<div class="media-left">
@@ -36,7 +29,7 @@
 				</div>
 			@endforeach
 
-		</div>
+		</div>{{-- Available stages end --}}
 
 		<!-- Locked Stage-->
 		<el-card class="box-card" style="background-color: #475669;">
@@ -46,6 +39,6 @@
 				<i class="eo-64 eo-lock" style="margin-top: 20%;"></i>
 			</div>
 		</el-card>
-	</div>
+	</div>{{-- Container end --}}
 
 @endsection

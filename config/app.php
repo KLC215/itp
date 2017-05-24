@@ -168,7 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
 		Encore\Admin\Providers\AdminServiceProvider::class,
-
+		Laracasts\Flash\FlashServiceProvider::class,
         /*
          * Application Service Providers...
          */

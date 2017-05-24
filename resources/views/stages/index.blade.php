@@ -2,44 +2,44 @@
 
 @section('content')
 
-	<div class="container">
+    <div class="container">
 
-		<div class="animated bounceInDown">
+        <div class="animated bounceInDown">
 
-			@foreach($stages as $stage)
-				<div class="{{ $stage['name'] == 'tutorial' ? 'col-md-4 col-md-offset-4 col-xs-12 ' : 'col-md-4 col-md-offset-4 col-xs-12 ' }}">
+            @foreach($stages as $stage)
+                <div class="row">
+                    {{--				<div class="{{ $stage['name'] == 'tutorial' ? 'col-md-4' : 'col-md-4' }}">--}}
 
-					<a href="{{ route('arcades') . '/'. $stage['name'] }}"
-					   class="a-inherit-color">
+                    @if(!$stage->single)
+                        <a href="{{ route('arcades') . '/'. $stage['name'] }}"
+                           class="a-inherit-color">
+                            @else
+                                <a href="{{ route('arcades') . '/'. $stage['name'] . '/start' }}"
+                                   class="a-inherit-color"
+                                   style="{{ $stage->lock ? 'pointer-events: none;cursor: default;filter: grayscale(100%);' : '' }}">
+                                    @endif
 
-						<el-card class="box-card-children-root hvr-grow"
-								 style="cursor: pointer; background-color: #F9FAFC;">
-							<el-progress
-									:text-inside="true"
-									:stroke-width="18"
-									:percentage="0"
-									status="success">
-							</el-progress>
-							<hr>
-							<div class="media">
-								<div class="media-left media-middle">
-									<img class="media-object" src="{{ asset($stage['image']) }}"
-										 alt="{{$stage['display_name']}}"
-										 width="100px"
-										 height="100px">
-								</div>
-								<div class="media-body">
-									<h3 class="media-heading"><b>{{ $stage['display_name'] }}</b></h3>
-									<hr>
-									<h4>{!!$stage['description']!!}</h4>
-								</div>
-							</div>
-						</el-card>
-					</a>
-				</div>
-			@endforeach
-		</div>
+                                    <el-card class="box-card-children-root hvr-grow"
+                                             style="cursor: pointer; background-color: #F9FAFC;">
+                                        <div class="media">
+                                            <div class="media-left media-top">
+                                                <img class="media-object" src="{{ asset($stage['image']) }}"
+                                                     alt="{{$stage['display_name']}}"
+                                                     width="200px"
+                                                     height="200px">
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="media-heading"><b>{{ $stage['display_name'] }}</b></h3>
+                                                <hr>
+                                                <h4>{!!$stage['description']!!}</h4>
+                                            </div>
+                                        </div>
+                                    </el-card>
+                                </a>
+                </div>
+            @endforeach
+        </div>
 
-	</div>
+    </div>
 
 @endsection

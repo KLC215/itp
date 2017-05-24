@@ -19,7 +19,10 @@
  */
 
 use Encore\Admin\Form;
+use App\Admin\Extensions\PHPEditor;
 
-Form::forget(['map', 'editor']);
+Form::extend('php', PHPEditor::class);
+
+Form::forget(['map']);
 
 

@@ -1,150 +1,177 @@
 <template>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<!--<pre v-highlightjs>-->
-			<!--<code class="java">-->
-			<!--{{ questionsData[0].question.problem }}-->
-			<!--</code>-->
-			<!--</pre>-->
-
-			<codemirror v-model="questionsData[0].question.problem"
-						:options="editorOptions"
-						class="CodeMirror"></codemirror>
-			<hr>
-			<h2 class="panel-title text-center">{{ questionsData[0].question.ask_for }}</h2>
-		</div>
-		<div class="panel-body">
-			<div class="col-xs-12 col-sm-6 text-center">
-				<button class="btn btn-primary btn-lg"
-						:disabled="btnData[0].disabled"
-						style="margin: 10px"
-						@click="onAnswer(btnData[0])">{{ btnData[0].data }}
-
-				</button>
-			</div>
-			<div class="col-xs-12 col-sm-6 text-center">
-				<button class="btn btn-primary btn-lg"
-						:disabled="btnData[1].disabled"
-						style="margin: 10px"
-						@click="onAnswer(btnData[1])">{{ btnData[1].data }}
-
-				</button>
-			</div>
-			<div class="col-xs-12 col-sm-6 text-center">
-				<button class="btn btn-primary btn-lg"
-						:disabled="btnData[2].disabled"
-						style="margin: 10px"
-						@click="onAnswer(btnData[2])">{{ btnData[2].data }}
-
-				</button>
-			</div>
-			<div class="col-xs-12 col-sm-6 text-center">
-				<button class="btn btn-primary btn-lg"
-						:disabled="btnData[3].disabled"
-						style="margin: 10px"
-						@click="onAnswer(btnData[3])">{{ btnData[3].data }}
-
-				</button>
-			</div>
-		</div>
-	</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <codemirror v-model="questions.question.problem"
+                        :options="editorOptions"
+                        class="CodeMirror">
+            </codemirror>
+            <hr>
+            <h1 class="panel-title text-center" v-html="questions.question.ask_for"></h1>
+        </div>
+        <div class="panel-body">
+            <div class="col-xs-12 col-sm-6 text-center"
+                 v-for="answer in btnAnswers">
+                <button class="btn btn-primary btn-lg"
+                        :disabled="answer.disabled"
+                        style="margin: 10px"
+                        @click="onAnswer(answer)">
+                    {{ answer.data }}
+                </button>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-	import { SUCCESS_SOUND, ERROR_SOUND } from '../../../core/sounds';
+    import { SUCCESS_SOUND, ERROR_SOUND } from '../../../core/sounds';
+    import { TUTORIAL_URL, COMPLETE_STAGE_POST_URL } from '../../../core/urls';
 
-	export default{
-		props: ['questions'],
-		data() {
-			return {
-				questionsData: null,
-				errorRatio: 0,
-				btnData: [],
-				editorOptions: {
-					tabSize: 4,
-					styleActiveLine: true,
-					line: true,
-					mode: 'text/x-java',
-					lineWrapping: true,
-					readOnly: true,
-				},
-			};
-		},
-		methods: {
-			onAnswer(answer) {
+    export default{
+        props: ['question-data', 'answer-data'],
 
-				const self = this;
+        data() {
+            return {
+                questions: this.questionData[0],
+                answers: this.answerData,
+                correctAnswer: 0,
+                errorRatio: this.questionData[0].question.error_ratio,
+                btnAnswers: [],
+                fakeNumbers: [],
+                startTime: '',
+                endTime: '',
+                timerInterval: null,
+                editorOptions: {
+                    tabSize: 4,
+                    styleActiveLine: true,
+                    line: true,
+                    mode: 'text/x-java',
+                    lineWrapping: true,
+                    readOnly: true,
+                },
+            };
+        },
 
-				if (!answer.correct) {
-					this.errorRatio++;
-					answer.disabled = true;
+        methods: {
+            onAnswer(answer) {
+                const self = this;
 
-					this.$swal('Oops...', 'Wrong answer, try again <i class="eo-32 eo-relaxed"></i>', 'error')
-						.then(() => {
-							if (this.errorRatio >= 2) {
-								this.$swal({
-									title: 'Umm...',
-									html: "It seems like you don't understand <b>While Loop</b><br>Let's go back to intro again<i class='eo-32 eo-relaxed'></i>",
-									type: 'warning',
-									showCancelButton: false,
-									confirmButtonColor: '#3085d6',
-									cancelButtonColor: '#d33',
-									confirmButtonText: 'Fighting! <i class="eo-32 eo-blush">'
-								}).then(function () {
-									for (let i = 0; i < self.btnData.length; i++) {
-										self.btnData[i].disabled = false;
-									}
-									location.reload();
-								});
-							}
-						});
-					ERROR_SOUND.play();
+                if (!answer.correct) {
+                    this.errorRatio++;
+                    console.log('Error ratio', this.errorRatio);
+                    answer.disabled = true;
 
+                    this.$swal('Oops...', 'Wrong answer, try again <i class="eo-32 eo-relaxed"></i>', 'error')
+                        .then(() => {
+                            if (this.errorRatio >= 2) {
+                                this.$swal({
+                                    title: 'Umm...',
+                                    html: "It seems like you don't understand <b>While Loop</b><br>Let's go back to intro again<i class='eo-32 eo-relaxed'></i>",
+                                    type: 'warning',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Fighting! <i class="eo-32 eo-blush">'
+                                }).then(function () {
+                                    for (let i = 0; i < self.btnData.length; i++) {
+                                        self.btnData[i].disabled = false;
+                                    }
+                                    window.location.href = '/arcades/tutorial/while-loop/intro';
+                                }, function (dismiss) {
+                                    if (dismiss === 'overlay') {
+                                        window.location.href = '/arcades/tutorial/while-loop/intro';
+                                    }
+                                });
+                            }
+                        });
+                    ERROR_SOUND.play();
+                    return;
+                }
+                this.endTime = moment.utc(moment(), 'HH:mm:ss');
+                let finishTime = moment.duration(this.endTime.diff(this.startTime)).asMilliseconds();
+                this.$swal('Good job!', 'You know what <b>While Loop</b> is! <i class="eo-32 eo-sunglasses"></i>', 'success')
+                    .then(() => {
+                        self.completed(finishTime);
+                    });
+                SUCCESS_SOUND.play();
+            },
+            shuffle(a) {
+                for (let i = a.length; i; i--) {
+                    let j = Math.floor(Math.random() * i);
+                    [a[i - 1], a[j]] = [a[j], a[i - 1]];
+                }
+            },
+            initQuestions() {
+                this.correctAnswer = _.random(3, 10);
 
+                console.log('Correct ans', this.correctAnswer);
 
-					return;
-				}
+                this.btnAnswers.push({
+                    correct: true,
+                    data: this.correctAnswer,
+                    disabled: false
+                });
+                this.questions.question.problem = this.questions.question.problem.replace(/\/ans\//g, this.correctAnswer + 1);
 
+                for (let i = 0; i < 3; i++) {
+                    this.btnAnswers.push({
+                        correct: false,
+                        data: this.initAnswers(),
+                        disabled: false
+                    });
+                }
 
-				this.$swal('Good job!', 'You know what <b>While Loop</b> is! <i class="eo-32 eo-sunglasses"></i>', 'success')
-					.then(() => {
-						self.$events.fire('completed', self.errorRatio);
-					});
-				SUCCESS_SOUND.play();
-				//this.$emit('answered', isCorrect);
+                this.shuffle(this.btnAnswers);
+            },
+            initAnswers() {
+                let number = _.random(3, 15);
+                if (number === this.correctAnswer || _.includes(this.fakeNumbers, number)) {
+                    return this.initAnswers();
+                }
+                this.fakeNumbers.push(number);
+                return number;
+            },
+            startTimer() {
+                this.startTime = moment.utc(moment(), 'HH:mm:ss');
+            },
+            completed(finishTime) {
+                const self = this;
+                console.log(this.questions);
+                axios.post(COMPLETE_STAGE_POST_URL, {
+                    stageId: self.questions.stage_id,
+                    levelId: self.questions.level_id,
+                    finishTime: finishTime,
+                    errorRatio: self.errorRatio,
+                }).then(response => {
+                    console.log(response);
+                    if (response.data.exp && response.data.coin) {
+                        self.$swal('Congratulations! <i class="eo-32 eo-tada"></i>', `You've got <br><img src="/images/coin_32.png" alt="Coin">&nbsp;&nbsp;${response.data.coin}<br><img src="/images/ic_exp_32.png" alt="EXP">&nbsp;&nbsp;${response.data.coin}`)
+                            .then(() => {
+                                window.location.href = TUTORIAL_URL;
+                            }, function (dismiss) {
+                                if (dismiss === 'overlay') {
+                                    window.location.href = TUTORIAL_URL;
+                                }
+                            });
+                    }
+                    if (response.data.message) {
+                        self.$swal('Congratulations! <i class="eo-32 eo-tada"></i>', response.data.message)
+                            .then(() => {
+                                window.location.href = TUTORIAL_URL;
+                            }, function (dismiss) {
+                                if (dismiss === 'overlay') {
+                                    window.location.href = TUTORIAL_URL;
+                                }
+                            });
+                    }
+                });
+            }
+        },
 
-			},
-			shuffle(a) {
-				for (let i = a.length; i; i--) {
-					let j = Math.floor(Math.random() * i);
-					[a[i - 1], a[j]] = [a[j], a[i - 1]];
-				}
-			},
-			generateQuestion() {
-				let correct = '';
-
-				this.questionsData[0].answers.forEach((answer) => {
-					if (answer.is_correct) {
-						correct = answer.answer;
-					}
-
-					this.btnData.push({ correct: answer.is_correct, data: answer.answer, disabled: false });
-
-					this.shuffle(this.btnData);
-				});
-
-				this.questionsData[0].question.problem = this.questionsData[0].question.problem.replace(/\/\/ans/g, correct);
-			}
-		},
-		created() {
-			this.questionsData = this.questions;
-			this.errorRatio = this.questions[0].question.error_ratio;
-			this.generateQuestion();
-		},
-		activated() {
-			console.log(this.questionsData[0]);
-		}
-	}
+        created() {
+            this.initQuestions();
+            this.startTimer();
+        },
+    }
 </script>
 
 <style scoped>

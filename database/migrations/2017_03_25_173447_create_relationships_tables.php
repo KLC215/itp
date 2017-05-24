@@ -49,6 +49,7 @@ class CreateRelationshipsTables extends Migration
 			$table->primary(['question_id', 'user_id']);
 		});
 
+
 	}
 
 	/**

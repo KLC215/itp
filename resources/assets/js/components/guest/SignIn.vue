@@ -25,7 +25,11 @@
 				</el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click.prevent="signIn('signInForm')" @keyup.enter="submit" native-type="submit">LOGIN</el-button>
+				<el-button type="primary"
+						   @click.prevent="signIn('signInForm')"
+						   @keyup.enter="submit"
+						   native-type="submit">LOGIN
+				</el-button>
 			</el-form-item>
 		</el-form>
 		<span slot="footer">
@@ -36,33 +40,37 @@
 </template>
 
 <script>
+	import { HOME_URL, SIGNIN_POST_URL }from '../../core/urls';
+
 	export default {
 		props: ['config'],
+
 		data() {
 			return {
 				signInForm: new Form({
-					email: '',
+					email   : '',
 					password: '',
 				}),
+
 				signInRules: {
-					email: [{
+					email   : [{
 						required: true,
-						message: 'Please enter email address!',
-						trigger: 'blur'
+						message : 'Please enter email address!',
+						trigger : 'blur'
 					},
-						{
-							type: 'email',
-							message: 'Please enter a correct email address!',
-							trigger: 'blur,change'
-						}
+							   {
+								   type   : 'email',
+								   message: 'Please enter a correct email address!',
+								   trigger: 'blur,change'
+							   }
 					],
 					password: [{
 						required: true,
-						message: 'Please enter password!',
-						trigger: 'blur'
+						message : 'Please enter password!',
+						trigger : 'blur'
 					}]
 				},
-				emailError: "",
+				emailError : "",
 			};
 		},
 		methods: {
@@ -98,7 +106,7 @@
 				this.$refs[formName].resetFields();
 			}
 		},
-		events: {
+		events : {
 			closeForm(formName) {
 				this.resetForm(formName);
 				this.emailError = "";

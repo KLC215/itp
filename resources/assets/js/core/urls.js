@@ -1,22 +1,23 @@
-const BASE_URL = 'http://itp.lh/';
+export const BASE_URL = 'http://loop.lh/';
 
 // Backend route groups
-const ARCADES_URL = BASE_URL + 'arcades/';
+export const ARCADES_URL = BASE_URL + 'arcades/';
+export const CHALLENGES_URL = BASE_URL + 'challenges/';
 
 // GET urls
-const HOME_URL = BASE_URL + 'home';
-const GET_AUTH_USER = BASE_URL + 'get-auth-user';
-const TUTORIAL_URL = ARCADES_URL + 'tutorial';
+export const HOME_URL = BASE_URL + 'home';
+export const SHOP_URL = BASE_URL + 'shop/';
+export const GET_AUTH_USER = BASE_URL + 'get-auth-user';
+export const TUTORIAL_URL = ARCADES_URL + 'tutorial';
+export const LEADERBOARD_URL = BASE_URL + 'leaderboard/';
+export const PROFILE_URL = BASE_URL + 'profile/';
 
 // POST urls
-const SIGNIN_POST_URL = BASE_URL + 'login';
-const SIGNUP_POST_URL = BASE_URL + 'register';
-const COMPLETED_STAGE_POST_URL = ARCADES_URL + 'completed-stage';
-
-window.BASE_URL = BASE_URL;
-window.SIGNIN_POST_URL = SIGNIN_POST_URL;
-window.SIGNUP_POST_URL = SIGNUP_POST_URL;
-window.HOME_URL = HOME_URL;
-window.GET_AUTH_USER = GET_AUTH_USER;
-window.COMPLETED_STAGE_POST_URL = COMPLETED_STAGE_POST_URL;
-window.TUTORIAL_URL = TUTORIAL_URL;
+export const SIGNIN_POST_URL = BASE_URL + 'login';
+export const SIGNUP_POST_URL = BASE_URL + 'register';
+export const COMPLETE_STAGE_POST_URL = ARCADES_URL + 'complete';
+export const COMPLETE_SINGE_STAGE_POST_URL = ARCADES_URL + 'single-complete';
+export const SHOP_DEAL_POST_URL = SHOP_URL + 'deal';
+export const HINTS_POST_URL = ARCADES_URL + 'hint';
+export const DEDUCT_ITEM_QTY_POST_URL = CHALLENGES_URL + 'item-qty-subtract-1';
+export const COMPLETE_CHALLENGE_POST_URL = CHALLENGES_URL + 'complete';

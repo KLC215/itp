@@ -4,10 +4,12 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueEvents from 'vue-events';
 import 'bootstrap-sass';
+import _ from 'lodash';
+import moment from 'moment';
+
 //import VueHighlightJS from 'vue-highlightjs';
 import VueCodeMirror from 'vue-codemirror'
 import VueSweetAlert from 'vue-sweetalert';
-
 
 // ElementUI modules
 import ElementUI from 'element-ui';
@@ -47,6 +49,8 @@ window.axios.defaults.headers.common = {
 };
 
 window.Form = Form;
+window._ = _;
+window.moment = moment;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
