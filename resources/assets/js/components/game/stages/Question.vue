@@ -366,10 +366,10 @@
                     ERROR_SOUND.play();
                     return;
                 }
-                /*this.statistics.correctRatio += 1;
-                 this.codingAns.data = [];
-                 this.codingAns.answers = [];
-                 this.clearHints();*/
+                this.statistics.correctRatio += 1;
+                this.codingAns.data = '';
+                this.codingAns.answer = '';
+                this.clearHints();
                 this.$swal('Good job!', '<i class="eo-32 eo-confetti_ball"></i>&nbsp; Correct! &nbsp;<i class="eo-32 eo-confetti_ball"></i>', 'success')
                     .then(() => {
                         //self.completed(finishTime);

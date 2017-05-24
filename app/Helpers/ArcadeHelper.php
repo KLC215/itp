@@ -30,7 +30,7 @@ class ArcadeHelper
 				$message = self::updateExistStageUserWithTutorialLevel($stage, $stage_user, $request);
 				
 				return $message;
-			case $request->levelId > 1:
+			case $request['levelId'] > 1:
 				$reward = self::updateExistStageUserWithLevels($stage, $stage_user, $request);
 				
 				return $reward;
